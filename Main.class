@@ -1,0 +1,27 @@
+package de.zombie_spawner.main;
+
+import java.util.ArrayList;
+
+import org.bukkit.event.Listener;
+import org.bukkit.plugin.PluginManager;
+import org.bukkit.plugin.java.JavaPlugin;
+
+
+public class Main extends JavaPlugin {
+	
+	public static ArrayList<ZombieBoss>ZombieBossList = new ArrayList<ZombieBoss>();
+	
+	
+	public void onEnable(){
+		System.out.println("ZombieSpawner 1.0");
+		uniqueItems.initItems();
+		
+		PluginManager pm = this.getServer().getPluginManager();
+		pm.registerEvents(new MobEvents(this), this);
+		
+		Commands commands = new Commands(this);
+		pm.registerEvents((Listener) commands, this);
+		this.getCommand("zs").setExecutor(commands);
+		
+	}
+}
